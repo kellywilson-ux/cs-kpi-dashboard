@@ -609,14 +609,14 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
       <div class="kpi-sub"><span class="note">9 projects · Jan–Aug 2026</span></div>
     </div>
     <div class="kpi amber">
-      <div class="kpi-label">Hours saved per project</div>
+      <div class="kpi-label">Hours Saved Per Project</div>
       <div class="kpi-val" id="d_hoursSaved">197h</div>
-      <div class="kpi-sub"><span class="note">Pilot Cohort Avg Hours Saved Per Project</span></div>
+      <div class="kpi-sub"><span class="note">Avg Hours Saved Per Project vs BIC Baseline</span></div>
     </div>
     <div class="kpi amber">
-      <div class="kpi-label">Savings vs BIC per project</div>
-      <div class="kpi-val">$<span id="d_savingsPerProj">—</span></div>
-      <div class="kpi-sub"><span class="note">at $75/hr blended rate</span></div>
+      <div class="kpi-label">Cost Saving Per Project</div>
+      <div class="kpi-val">$<span id="d_savingsPerProj">14,775</span></div>
+      <div class="kpi-sub"><span class="note">Avg Cost Savings Per Project vs BIC Baseline</span></div>
     </div>
   </div>
 
@@ -1029,12 +1029,12 @@ const DEFAULTS = {
   ],
 
   lastUpdated: null,
-  narrativeAI:     "The pilot cohort continues to outperform the Imagine target of 165h, averaging 147h actual across 9 completed projects. All 7 active AI workstreams are in production or active testing. FED adoption of Claude Code is accelerating — 5 team members logged over 50 sessions in July, with Rachel Edwards leading at 530 sessions. Discovery synthesis and AI-assisted homepage mockups are driving the strongest time savings in the Design function.",
-  narrativeQA:     "Custom 1-Phase issues dropped to 12.8 in July — the lowest point in the 6-month window — suggesting push-left practices and earlier design alignment are reducing defect volume. Custom 2-Phase also improved from 27.6 to 23.4, though age in QA ticked up slightly for both Custom types. Theme performance remained stable. July saw 134 total projects approved across all types.",
-  narrativeClaude: "20 of 24 team members were active on Claude in July across Chat, Claude Code, and Cowork. Claude Code dominates usage at 1,237 sessions — driven primarily by the FED team. Kristi Young leads Cowork adoption at 28 sessions. The breadth of multi-product usage signals that Claude is becoming embedded across multiple workflow types, not just a single use case."
+  narrativeAI:     "The pilot cohort continues to outperform the Imagine target of 165h, averaging 147h actual across 9 completed projects.<br><br>All 7 active AI workstreams are in production or active testing.<br><br>FED adoption of Claude Code is accelerating — 5 team members logged over 50 sessions in July, with Rachel Edwards leading at 530 sessions. Discovery synthesis and AI-assisted homepage mockups are driving the strongest time savings in the Design function.",
+  narrativeQA:     "Custom 1-Phase issues dropped to 12.8 in July — the lowest point in the 6-month window — suggesting push-left practices and earlier design alignment are reducing defect volume.<br><br>Custom 2-Phase also improved from 27.6 to 23.4, though age in QA ticked up slightly for both Custom types.<br><br>Theme performance remained stable. July saw 134 total projects approved across all types.",
+  narrativeClaude: "20 of 24 team members were active on Claude in July across Chat, Claude Code, and Cowork.<br><br>Claude Code dominates usage at 1,237 sessions — driven primarily by the FED team. Kristi Young leads Cowork adoption at 28 sessions.<br><br>The breadth of multi-product usage signals that Claude is becoming embedded across multiple workflow types, not just a single use case."
 };
 
-const SK = "finalsite_cs_kpi_v35";
+const SK = "finalsite_cs_kpi_v38";
 let D = load();
 let editing = false;
 const CC = {};
@@ -1155,6 +1155,9 @@ function renderOverview() {
   setText("d_pilotAvg", D.pilotAvg+"h");
   setText("d_pilotAvg2", D.pilotAvg+"h");
   setText("d_hoursSaved", hoursSaved+"h");
+  const totalHoursSaved = hoursSaved * D.pilotCount;
+  setText("d_totalHoursSaved", totalHoursSaved.toLocaleString()+"h");
+  setText("d_totalSavingsDollars", (totalHoursSaved * D.blendedRate).toLocaleString());
   setText("d_totalSavings", Math.round(saved).toLocaleString());
   setText("d_savingsNote", `${D.pilotCount} projects × ${hoursSaved}h × $${D.blendedRate}/hr`);
   setText("d_savingsPerProj", Math.round(perProj).toLocaleString());
@@ -1172,9 +1175,9 @@ function renderOverview() {
   const aiEl = document.getElementById('ov_aiText');
   const qaEl = document.getElementById('ov_qaText');
   const clEl = document.getElementById('ov_claudeText');
-  if(aiEl) aiEl.textContent = D.narrativeAI || '';
-  if(qaEl) qaEl.textContent = D.narrativeQA || '';
-  if(clEl) clEl.textContent = D.narrativeClaude || '';
+  if(aiEl) aiEl.innerHTML = D.narrativeAI || '';
+  if(qaEl) qaEl.innerHTML = D.narrativeQA || '';
+  if(clEl) clEl.innerHTML = D.narrativeClaude || '';
 
   // Overview headline metrics
   setText('ov_pilotAvg', (D.pilotAvg || 147) + 'h');
