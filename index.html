@@ -226,8 +226,6 @@ body {
 .wf-status { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; margin-top: 4px; display: inline-flex; }
 .wf-status.live { background: var(--teal-lt); color: var(--teal); }
 .wf-status.pilot { background: var(--amber-lt); color: var(--amber); }
-.wf-status.testing { background: #FEF9C3; color: #92400E; }
-.wf-chip-testing { background: #FFFBEB !important; border-color: #FCD34D !important; }
 
 /* ── Section labels ─────────────────────────────────────── */
 .section-label {
@@ -380,7 +378,7 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
       <div class="brand-mark"><i class="ti ti-brain"></i></div>
       <div>
         <div class="header-title">Creative Services KPI Dashboard</div>
-        <div class="header-sub">Finalsite Professional Services</div>
+        <div class="header-sub">Finalsite Professional Services &middot; Imagine Design Experience</div>
       </div>
     </div>
     <div class="header-meta">
@@ -405,6 +403,38 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
 
 <!-- ── OVERVIEW ── -->
 <div id="panel-overview" class="panel active">
+  <div class="kpi-grid">
+    <div class="kpi coral">
+      <div class="kpi-label">Legacy BIC estimated hours</div>
+      <div class="kpi-val coral">~500h</div>
+      <div class="kpi-sub"><span class="note">Original BIC package scope</span></div>
+    </div>
+    <div class="kpi coral">
+      <div class="kpi-label">Legacy BIC avg actual hours</div>
+      <div class="kpi-val coral">344h</div>
+      <div class="kpi-sub"><span class="note">All-time · 69 projects · Cloud Coach</span></div>
+    </div>
+    <div class="kpi teal">
+      <div class="kpi-label">Imagine target</div>
+      <div class="kpi-val teal">165h</div>
+      <div class="kpi-sub"><span class="note"><i class="ti ti-trending-down" style="font-size:12px;"></i> 52% reduction vs BIC</span></div>
+    </div>
+    <div class="kpi teal">
+      <div class="kpi-label">Pilot cohort avg actual</div>
+      <div class="kpi-val teal" id="d_pilotAvg">147h</div>
+      <div class="kpi-sub"><span class="note"><i class="ti ti-check" style="font-size:12px;"></i> Already beating target</span></div>
+    </div>
+    <div class="kpi amber">
+      <div class="kpi-label">Hours saved per project</div>
+      <div class="kpi-val" id="d_hoursSaved">197h</div>
+      <div class="kpi-sub"><span class="note">Pilot avg. vs. BIC baseline</span></div>
+    </div>
+    <div class="kpi navy">
+      <div class="kpi-label">Claude — team usage (July)</div>
+      <div class="kpi-val" id="d_activeUsers">—</div>
+      <div class="kpi-sub"><span class="note">of <span id="d_totalSeatsFull">23</span> members · <span id="d_totalAllSessions">—</span> total sessions</span></div>
+    </div>
+  </div>
 
   <!-- Headline sentence -->
   <div style="background:var(--navy); border-radius:var(--radius); padding:16px 22px; margin-bottom:24px; display:flex; align-items:flex-start; gap:10px;">
@@ -412,163 +442,77 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
     <p style="font-family:'DM Serif Display', Georgia, serif; font-size:14px; color:rgba(255,255,255,.88); line-height:1.6; font-style:italic;">We've reimagined how we deliver Custom design — combining AI-assisted workflows, a mature design system, and reusable component libraries to deliver a stronger product in nearly half the time.</p>
   </div>
 
-  <!-- ── Overview KPI cards ── -->
-  <div class="kpi-grid" style="margin-bottom:28px;">
-    <div class="kpi navy">
-      <div class="kpi-label">Projects approved — July 2026</div>
-      <div class="kpi-val">134</div>
-      <div class="kpi-sub"><span class="note">All types · source: Jira DQA board</span></div>
+  <!-- LOE Hero -->
+  <div class="loe-hero">
+    <div class="loe-hero-title">Level of Effort — Custom Design Package Transformation</div>
+    <div class="loe-hero-sub">Avg. actual hours per project · source: Cloud Coach · 291 closed Custom projects (all-time, legacy removed)</div>
+    <div class="loe-bars">
+      <div class="loe-row">
+        <div class="loe-row-label">BIC estimated<br><span style="font-size:10px; color:var(--text-3);">package scope</span></div>
+        <div class="loe-track">
+          <div class="loe-fill" style="width:100%; background:#CBD5E1; opacity:.6;">
+            <span style="color:#475569;">~500h</span>
+          </div>
+        </div>
+        <div class="loe-row-note" style="color:var(--text-3);">Original scope</div>
+      </div>
+      <div class="loe-row">
+        <div class="loe-row-label">Legacy BIC actual<br><span style="font-size:10px; color:var(--text-3);">69 projects</span></div>
+        <div class="loe-track">
+          <div class="loe-fill" style="width:68.8%; background:var(--coral);">
+            <span>344h</span>
+          </div>
+        </div>
+        <div class="loe-row-note" style="color:var(--coral); font-weight:700;">Pre-AI baseline</div>
+      </div>
+      <div class="loe-row">
+        <div class="loe-row-label">Pilot cohort<br><span style="font-size:10px; color:var(--text-3);">9 projects</span></div>
+        <div class="loe-track" style="position:relative;">
+          <div class="loe-fill" id="pilotBar" style="width:42.7%; background:var(--teal);">
+            <span>147h</span>
+          </div>
+          <div class="target-line" data-label="Target 165h" id="targetLine" style="left:48%;"></div>
+        </div>
+        <div class="loe-row-note" style="color:var(--teal); font-weight:700;"><i class="ti ti-check" style="font-size:12px;"></i> Under target</div>
+      </div>
+      <div class="loe-row">
+        <div class="loe-row-label">Imagine target<br><span style="font-size:10px; color:var(--text-3);">goal</span></div>
+        <div class="loe-track">
+          <div class="loe-fill" style="width:48%; background:var(--navy); opacity:.4;">
+            <span>165h</span>
+          </div>
+        </div>
+        <div class="loe-row-note">Target</div>
+      </div>
     </div>
-    <div class="kpi teal">
-      <div class="kpi-label">Reduction in delivery hours</div>
-      <div class="kpi-val teal">52%</div>
-      <div class="kpi-sub"><span class="note">344h BIC avg → 165h Imagine target</span></div>
-    </div>
-    <div class="kpi teal">
-      <div class="kpi-label">Team active on Claude</div>
-      <div class="kpi-val teal">83%</div>
-      <div class="kpi-sub"><span class="note">20 of 24 members · July 2026</span></div>
+    <div class="loe-legend">
+      <span><span class="leg" style="background:#CBD5E1;"></span>BIC estimated (~500h)</span>
+      <span><span class="leg" style="background:var(--coral);"></span>BIC avg actual (344h)</span>
+      <span><span class="leg" style="background:var(--teal);"></span>Pilot cohort (avg actual, Jan–Jul 2026)</span>
+      <span><span class="leg" style="background:var(--navy);"></span>Imagine target</span>
+      <span style="color:var(--coral);"><i class="ti ti-minus" style="font-size:12px;"></i> Target line</span>
     </div>
   </div>
 
-  <!-- ── SECTION 2: Monthly narrative ── -->
-  <div class="section-label" style="margin-bottom:12px;">Monthly Narrative</div>
-  <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px 28px; margin-bottom:28px; box-shadow:var(--shadow);">
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px;" id="ov_narrativeGrid">
-
-      <!-- AI Impact narrative -->
-      <div>
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-          <div style="width:28px; height:28px; border-radius:8px; background:var(--teal-lt); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <i class="ti ti-sparkles" style="color:var(--teal); font-size:14px;"></i>
-          </div>
-          <div style="font-size:12px; font-weight:700; color:var(--text);">AI Impact</div>
-        </div>
-        <div id="ov_aiText" style="font-size:12px; color:var(--text-2); line-height:1.8;"></div>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="card-title">QA Defects — Monthly Trend</div>
+      <div class="card-sub">Source: Jira DQA board</div>
+      <div class="legend">
+        <span><span class="leg" style="background:#0F1C2E;"></span>Custom</span>
+        <span><span class="leg" style="background:#00B89C;"></span>Theme</span>
       </div>
-
-      <!-- QA narrative -->
-      <div>
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-          <div style="width:28px; height:28px; border-radius:8px; background:var(--purple-lt); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <i class="ti ti-shield-check" style="color:var(--purple); font-size:14px;"></i>
-          </div>
-          <div style="font-size:12px; font-weight:700; color:var(--text);">QA Efficiency</div>
-        </div>
-        <div id="ov_qaText" style="font-size:12px; color:var(--text-2); line-height:1.8;"></div>
-      </div>
-
-      <!-- Claude Usage narrative -->
-      <div>
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-          <div style="width:28px; height:28px; border-radius:8px; background:#E0F2FE; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <i class="ti ti-brain" style="color:#0369A1; font-size:14px;"></i>
-          </div>
-          <div style="font-size:12px; font-weight:700; color:var(--text);">Claude Usage</div>
-        </div>
-        <div id="ov_claudeText" style="font-size:12px; color:var(--text-2); line-height:1.8;"></div>
-      </div>
+      <div style="position:relative; height:180px;"><canvas id="c_qaOverview"></canvas></div>
     </div>
-
-    <div class="edit-box" style="margin-top:16px; padding:12px 16px;">
-      <div class="edit-title">Edit monthly narratives</div>
-      <p style="font-size:11px; color:var(--text-3); margin-bottom:10px;">Update each column with your monthly insights. Keep to 3–5 sentences — this is the executive-facing summary Scot reads first.</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
-        <div>
-          <label style="font-size:11px; font-weight:600; color:var(--text-2); display:block; margin-bottom:4px;">AI Impact narrative</label>
-          <textarea class="ef" id="ov_aiInput" style="width:100%; height:100px; font-size:11px; line-height:1.7; resize:vertical;" placeholder="Write your AI Impact summary..."></textarea>
-        </div>
-        <div>
-          <label style="font-size:11px; font-weight:600; color:var(--text-2); display:block; margin-bottom:4px;">QA Efficiency narrative</label>
-          <textarea class="ef" id="ov_qaInput" style="width:100%; height:100px; font-size:11px; line-height:1.7; resize:vertical;" placeholder="Write your QA summary..."></textarea>
-        </div>
-        <div>
-          <label style="font-size:11px; font-weight:600; color:var(--text-2); display:block; margin-bottom:4px;">Claude Usage narrative</label>
-          <textarea class="ef" id="ov_claudeInput" style="width:100%; height:100px; font-size:11px; line-height:1.7; resize:vertical;" placeholder="Write your Claude Usage summary..."></textarea>
-        </div>
+    <div class="chart-card">
+      <div class="card-title">Claude Usage by Product — July 2026</div>
+      <div class="card-sub">Chat conversations · Claude Code sessions · Cowork sessions · 23 team members</div>
+      <div class="legend">
+        <span><span class="leg" style="background:var(--purple);"></span>Chat (77)</span>
+        <span><span class="leg" style="background:#0EA5E9;"></span>Code (1,237)</span>
+        <span><span class="leg" style="background:var(--teal);"></span>Cowork (133)</span>
       </div>
-    </div>
-  </div>
-
-  <!-- ── SECTION 3: Month-over-month deltas ── -->
-  <div class="section-label" style="margin-bottom:12px;">Month-over-Month Trends</div>
-  <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; box-shadow:var(--shadow); margin-bottom:24px;">
-    <table style="width:100%; border-collapse:collapse; font-size:12px;">
-      <thead>
-        <tr style="background:var(--slate-lt);">
-          <th style="text-align:left; padding:10px 14px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--text-3); border-bottom:2px solid var(--border); width:40%;">Metric</th>
-          <th style="text-align:center; padding:10px 14px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--text-3); border-bottom:2px solid var(--border); width:15%;">June</th>
-          <th style="text-align:center; padding:10px 14px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--text-3); border-bottom:2px solid var(--border); width:15%;">July</th>
-          <th style="text-align:center; padding:10px 14px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--text-3); border-bottom:2px solid var(--border); width:30%;">Trend</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 14px; color:var(--text-2);">Custom 1-Phase — avg issues</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">15.2</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">12.8</td>
-          <td style="padding:10px 14px; text-align:center;"><span style="font-size:11px; font-weight:700; color:var(--teal); background:var(--teal-lt); padding:3px 10px; border-radius:20px;">▼ Improving</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border); background:var(--slate-lt);">
-          <td style="padding:10px 14px; color:var(--text-2);">Custom 2-Phase — avg issues</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">27.6</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">23.4</td>
-          <td style="padding:10px 14px; text-align:center;"><span style="font-size:11px; font-weight:700; color:var(--teal); background:var(--teal-lt); padding:3px 10px; border-radius:20px;">▼ Improving</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 14px; color:var(--text-2);">Theme — avg issues</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">2.0</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">2.2</td>
-          <td style="padding:10px 14px; text-align:center;"><span style="font-size:11px; font-weight:700; color:var(--amber); background:var(--amber-lt); padding:3px 10px; border-radius:20px;">▲ Monitor</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border); background:var(--slate-lt);">
-          <td style="padding:10px 14px; color:var(--text-2);">Custom 1-Phase — avg days in QA</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">8.4</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">9.1</td>
-          <td style="padding:10px 14px; text-align:center;"><span style="font-size:11px; font-weight:700; color:var(--amber); background:var(--amber-lt); padding:3px 10px; border-radius:20px;">▲ Monitor</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 14px; color:var(--text-2);">Custom 2-Phase — avg days in QA</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">14.2</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">15.6</td>
-          <td style="padding:10px 14px; text-align:center;"><span style="font-size:11px; font-weight:700; color:var(--amber); background:var(--amber-lt); padding:3px 10px; border-radius:20px;">▲ Monitor</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border); background:var(--slate-lt);">
-          <td style="padding:10px 14px; color:var(--text-2);">Theme — avg days in QA</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">3.4</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">3.1</td>
-          <td style="padding:10px 14px; text-align:center;"><span style="font-size:11px; font-weight:700; color:var(--teal); background:var(--teal-lt); padding:3px 10px; border-radius:20px;">▼ Improving</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 14px; color:var(--text-2);">Custom 1-Phase — avg revision rounds</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">3.6</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">3.2</td>
-          <td style="padding:10px 14px; text-align:center;"><span style="font-size:11px; font-weight:700; color:var(--teal); background:var(--teal-lt); padding:3px 10px; border-radius:20px;">▼ Improving</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border); background:var(--slate-lt);">
-          <td style="padding:10px 14px; color:var(--text-2);">Custom 2-Phase — avg revision rounds</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">5.6</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">5.1</td>
-          <td style="padding:10px 14px; text-align:center;"><span style="font-size:11px; font-weight:700; color:var(--teal); background:var(--teal-lt); padding:3px 10px; border-radius:20px;">▼ Improving</span></td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:10px 14px; color:var(--text-2);">Theme — avg revision rounds</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">2.1</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">1.9</td>
-          <td style="padding:10px 14px; text-align:center;"><span style="font-size:11px; font-weight:700; color:var(--teal); background:var(--teal-lt); padding:3px 10px; border-radius:20px;">▼ Improving</span></td>
-        </tr>
-        <tr style="background:var(--slate-lt);">
-          <td style="padding:10px 14px; color:var(--text-2);">Pilot cohort avg actual hours</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">—</td>
-          <td style="padding:10px 14px; font-weight:600; text-align:center;">147h</td>
-          <td style="padding:10px 14px; text-align:center;"><span style="font-size:11px; font-weight:700; color:var(--teal); background:var(--teal-lt); padding:3px 10px; border-radius:20px;">✓ Under Target</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="edit-box" style="margin-top:16px; padding:12px 16px;">
-      <div class="edit-title">Edit delta table</div>
-      <p style="font-size:11px; color:var(--text-3);">Update June and July values monthly. Trend labels: "▼ Improving" (teal), "▲ Monitor" (amber), "▲ Concern" (coral), "→ Stable" (slate). Pull QA data from Jira DQA board; AI Impact from Cloud Coach; Claude usage from claude.ai/analytics.</p>
+      <div style="position:relative; height:145px;"><canvas id="c_claudeUsers"></canvas></div>
     </div>
   </div>
 
@@ -581,98 +525,36 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
       <label>Active Claude users</label><input class="ef" id="i_activeUsers" type="number">
       <label>Total team seats</label><input class="ef" id="i_totalSeats" type="number">
     </div>
+    <p style="font-size:11px; color:var(--text-3); margin-top:8px;">Cost savings = (344h BIC baseline − pilot avg) × pilot count × $75/hr. Active users from Claude Enterprise admin → Usage analytics (ask Primary Owner).</p>
   </div>
 </div>
 
 <!-- ── IMAGINE & AI ── -->
 <div id="panel-imagine" class="panel">
-
-  <div class="kpi-grid" style="margin-bottom:24px;">
-    <div class="kpi coral">
-      <div class="kpi-label">Legacy BIC estimated hours</div>
-      <div class="kpi-val coral">~500h</div>
-      <div class="kpi-sub"><span class="note">Original BIC package · Cloud Coach</span></div>
-    </div>
+  <div class="kpi-grid">
     <div class="kpi coral">
       <div class="kpi-label">BIC baseline (all-time)</div>
       <div class="kpi-val coral">344h</div>
       <div class="kpi-sub"><span class="note">69 projects · Cloud Coach</span></div>
     </div>
     <div class="kpi teal">
-      <div class="kpi-label">Imagine target</div>
-      <div class="kpi-val teal">165h</div>
-      <div class="kpi-sub"><span class="note">Pilot already under target</span></div>
-    </div>
-    <div class="kpi teal">
       <div class="kpi-label">Pilot cohort avg</div>
       <div class="kpi-val teal" id="d_pilotAvg2">147h</div>
       <div class="kpi-sub"><span class="note">9 projects · Jan–Aug 2026</span></div>
     </div>
-    <div class="kpi amber">
-      <div class="kpi-label">Hours Saved Per Project</div>
-      <div class="kpi-val" id="d_hoursSaved">197h</div>
-      <div class="kpi-sub"><span class="note">Avg Hours Saved Per Project vs BIC Baseline</span></div>
+    <div class="kpi teal">
+      <div class="kpi-label">Imagine target</div>
+      <div class="kpi-val teal">165h</div>
+      <div class="kpi-sub"><span class="note">Pilot already under target</span></div>
     </div>
     <div class="kpi amber">
-      <div class="kpi-label">Cost Saving Per Project</div>
-      <div class="kpi-val">$<span id="d_savingsPerProj">14,775</span></div>
-      <div class="kpi-sub"><span class="note">Avg Cost Savings Per Project vs BIC Baseline</span></div>
+      <div class="kpi-label">Savings vs BIC per project</div>
+      <div class="kpi-val">$<span id="d_savingsPerProj">—</span></div>
+      <div class="kpi-sub"><span class="note">at $75/hr blended rate</span></div>
     </div>
   </div>
 
-  <!-- LOE Hero -->
-  <div class="loe-hero">
-    <div class="loe-hero-title">Level of Effort — Custom Design Package Transformation</div>
-    <div class="loe-hero-sub">Avg. actual hours per project · source: Cloud Coach · 291 closed Custom projects (all-time, legacy removed)</div>
-    <div class="loe-bars">
-      <div class="loe-row">
-        <div class="loe-row-label">BIC Estimated<br><span style="font-size:10px; color:var(--text-3);">package scope</span></div>
-        <div class="loe-track">
-          <div class="loe-fill" style="width:100%; background:#CBD5E1; opacity:.6;">
-            <span style="color:#475569;">~500h</span>
-          </div>
-        </div>
-        <div class="loe-row-note" style="color:var(--text-3);">Original Scope</div>
-      </div>
-      <div class="loe-row">
-        <div class="loe-row-label">Legacy BIC Actual<br><span style="font-size:10px; color:var(--text-3);">69 projects</span></div>
-        <div class="loe-track">
-          <div class="loe-fill" style="width:68.8%; background:var(--coral);">
-            <span>344h</span>
-          </div>
-        </div>
-        <div class="loe-row-note" style="color:var(--coral); font-weight:700;">Pre-AI Baseline</div>
-      </div>
-      <div class="loe-row">
-        <div class="loe-row-label">Pilot Cohort<br><span style="font-size:10px; color:var(--text-3);">9 completed projects</span></div>
-        <div class="loe-track" style="position:relative;">
-          <div class="loe-fill" id="pilotBar" style="width:42.7%; background:var(--teal);">
-            <span>147h</span>
-          </div>
-          <div class="target-line" data-label="Target 165h" id="targetLine" style="left:48%;"></div>
-        </div>
-        <div class="loe-row-note" style="color:var(--teal); font-weight:700;"><i class="ti ti-check" style="font-size:12px;"></i> Under Target</div>
-      </div>
-      <div class="loe-row">
-        <div class="loe-row-label">Imagine Target<br><span style="font-size:10px; color:var(--text-3);">goal</span></div>
-        <div class="loe-track">
-          <div class="loe-fill" style="width:48%; background:var(--navy); opacity:.4;">
-            <span>165h</span>
-          </div>
-        </div>
-        <div class="loe-row-note">Target</div>
-      </div>
-    </div>
-    <div class="loe-legend">
-      <span><span class="leg" style="background:#CBD5E1;"></span>BIC Estimated (~500h)</span>
-      <span><span class="leg" style="background:var(--coral);"></span>BIC Avg Actual (344h)</span>
-      <span><span class="leg" style="background:var(--teal);"></span>Pilot Cohort (avg actual, Jan–Jul 2026)</span>
-      <span><span class="leg" style="background:var(--navy);"></span>Imagine Target</span>
-      <span style="color:var(--coral);"><i class="ti ti-minus" style="font-size:12px;"></i> Target line</span>
-    </div>
-  </div>
-
-<div class="section-label" style="margin-bottom:4px;">In-Flight Pilot Project Outcomes — Hours Saved by Phase</div>
+  <div class="section-label" style="margin-bottom:4px;">In-Flight Pilot Project Outcomes — Hours Saved by Phase</div>
   <p style="font-size:11px; color:var(--text-3); margin-bottom:14px;">Source: AI pilot tracking spreadsheet · self-reported by team · qualitative estimates</p>
   <div class="pilot-grid" id="pilotGrid"></div>
 
@@ -702,94 +584,94 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
 
 <!-- ── QA EFFICIENCY ── -->
 <div id="panel-qa" class="panel">
-  <div class="qa-scorecard" style="margin-bottom:20px;">
-    <div class="qa-scorecard-title">QA Efficiency Scorecard — July 2026 · Source: Jira DQA Board</div>
-    <!-- 3x3 grid: rows = type, cols = metric -->
-    <div style="display:grid; grid-template-columns:120px 1fr 1fr 1fr; gap:0; margin-top:4px;">
-      <!-- Header row -->
-      <div></div>
-      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:rgba(255,255,255,.45); padding-bottom:10px; text-align:center;">Avg Issues</div>
-      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:rgba(255,255,255,.45); padding-bottom:10px; text-align:center;">Avg Days in QA</div>
-      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:rgba(255,255,255,.45); padding-bottom:10px; text-align:center;">Avg Rounds</div>
-      <!-- Theme row -->
-      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--teal); display:flex; align-items:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">Theme</div>
-      <div style="text-align:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">
-        <div style="font-size:26px; font-weight:700; color:var(--teal);" id="d_themeIssues">2.2</div>
-        <div style="font-size:10px; color:rgba(255,255,255,.4);">▲ vs Jun 2.0</div>
+  <div class="qa-scorecard">
+    <div class="qa-scorecard-title">QA efficiency scorecard — July 2026 · source: Jira DQA board</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:4px;">
+      <!-- Custom -->
+      <div>
+        <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--teal); margin-bottom:12px;">Custom (BIC / Signature / Select)</div>
+        <div class="qa-score-grid">
+          <div class="qa-score">
+            <div class="qa-score-val" id="d_avgIssues">17.4</div>
+            <div class="qa-score-label">Avg issues / project</div>
+            <div class="qa-score-delta" id="d_issuesDelta">▼ vs Jun 21.4</div>
+          </div>
+          <div class="qa-score">
+            <div class="qa-score-val" id="d_avgAge">11.8</div>
+            <div class="qa-score-label">Avg days in QA</div>
+            <div class="qa-score-delta" id="d_ageDelta">▲ vs Jun 11.2</div>
+          </div>
+          <div class="qa-score">
+            <div class="qa-score-val" id="d_avgRounds">3.9</div>
+            <div class="qa-score-label">Avg revision rounds</div>
+            <div class="qa-score-delta" id="d_roundsDelta">▼ vs Jun 4.2</div>
+          </div>
+          <div class="qa-score">
+            <div class="qa-score-val" id="d_totalProjects">134</div>
+            <div class="qa-score-label">Total projects approved</div>
+            <div class="qa-score-delta"></div>
+          </div>
+        </div>
       </div>
-      <div style="text-align:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">
-        <div style="font-size:26px; font-weight:700; color:var(--teal);">3.1</div>
-        <div style="font-size:10px; color:rgba(255,255,255,.4);">▼ vs Jun 3.4</div>
-      </div>
-      <div style="text-align:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">
-        <div style="font-size:26px; font-weight:700; color:var(--teal);" id="d_themeRounds">1.9</div>
-        <div style="font-size:10px; color:rgba(255,255,255,.4);">▼ vs Jun 2.1</div>
-      </div>
-      <!-- Custom 1-Phase row -->
-      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#fff; display:flex; align-items:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">Custom<br>1-Phase</div>
-      <div style="text-align:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">
-        <div style="font-size:26px; font-weight:700; color:#fff;" id="d_avgIssues">12.8</div>
-        <div style="font-size:10px; color:rgba(255,255,255,.4);" id="d_issuesDelta">▼ vs Jun 15.2</div>
-      </div>
-      <div style="text-align:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">
-        <div style="font-size:26px; font-weight:700; color:#fff;" id="d_avgAge">9.1</div>
-        <div style="font-size:10px; color:rgba(255,255,255,.4);" id="d_ageDelta">▲ vs Jun 8.4</div>
-      </div>
-      <div style="text-align:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">
-        <div style="font-size:26px; font-weight:700; color:#fff;" id="d_avgRounds">3.2</div>
-        <div style="font-size:10px; color:rgba(255,255,255,.4);" id="d_roundsDelta">▼ vs Jun 3.6</div>
-      </div>
-      <!-- Custom 2-Phase row -->
-      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--amber); display:flex; align-items:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">Custom<br>2-Phase</div>
-      <div style="text-align:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">
-        <div style="font-size:26px; font-weight:700; color:var(--amber);">23.4</div>
-        <div style="font-size:10px; color:rgba(255,255,255,.4);">▼ vs Jun 27.6</div>
-      </div>
-      <div style="text-align:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">
-        <div style="font-size:26px; font-weight:700; color:var(--amber);">15.6</div>
-        <div style="font-size:10px; color:rgba(255,255,255,.4);">▲ vs Jun 14.2</div>
-      </div>
-      <div style="text-align:center; padding:8px 0; border-top:1px solid rgba(255,255,255,.08);">
-        <div style="font-size:26px; font-weight:700; color:var(--amber);">5.1</div>
-        <div style="font-size:10px; color:rgba(255,255,255,.4);">▼ vs Jun 5.6</div>
+      <!-- Theme -->
+      <div>
+        <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,.45); margin-bottom:12px;">Theme (Theme / Theme FLEX)</div>
+        <div class="qa-score-grid">
+          <div class="qa-score">
+            <div class="qa-score-val" style="color:rgba(255,255,255,.7);" id="d_themeIssues">2.2</div>
+            <div class="qa-score-label">Avg issues / project</div>
+            <div class="qa-score-delta">▲ vs Jun 2.0</div>
+          </div>
+          <div class="qa-score">
+            <div class="qa-score-val" style="color:rgba(255,255,255,.7);" id="d_themeAge">3.1</div>
+            <div class="qa-score-label">Avg days in QA</div>
+            <div class="qa-score-delta">▼ vs Jun 3.4</div>
+          </div>
+          <div class="qa-score">
+            <div class="qa-score-val" style="color:rgba(255,255,255,.7);" id="d_themeRounds">1.9</div>
+            <div class="qa-score-label">Avg revision rounds</div>
+            <div class="qa-score-delta">▼ vs Jun 2.1</div>
+          </div>
+          <div class="qa-score">
+            <div class="qa-score-val" style="color:rgba(255,255,255,.7);">—</div>
+            <div class="qa-score-label">Work orders excluded</div>
+            <div class="qa-score-delta"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <p style="font-size:11px; color:var(--text-3); margin-bottom:20px;">Source: Jira DQA board · July 2026 · QA Project Phases (customfield_12073) · Work orders excluded</p>
 
   <div class="chart-grid">
     <div class="chart-card full">
-      <div class="card-title">Issues per Project — 6-Month Rolling Avg.</div>
-      <div class="card-sub">Source: Jira DQA board · Feb–Jul 2026 · QA Project Phases field</div>
-      <div style="display:flex; gap:20px; margin-bottom:10px; font-size:11px; color:var(--text-2); flex-wrap:wrap;">
-        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:24px;height:2px;background:#00B89C;"></span>Theme</span>
-        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:24px;height:2px;background:#0F1C2E;"></span>Custom 1-Phase</span>
-        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:24px;height:2px;background:#F59E0B;border-top:2px dashed #F59E0B;"></span>Custom 2-Phase</span>
+      <div class="card-title">Issues per Project — Custom vs. Theme (6-Month Rolling Avg.)</div>
+      <div class="card-sub">Source: Jira DQA board · Mar–Jul 2026</div>
+      <div class="legend">
+        <span><span class="leg" style="background:#0F1C2E;"></span>Custom</span>
+        <span><span class="leg" style="background:#00B89C;"></span>Theme</span>
       </div>
-      <div style="position:relative; height:240px;"><canvas id="c_issuesByType"></canvas></div>
+      <div style="position:relative; height:220px;"><canvas id="c_issuesByType"></canvas></div>
     </div>
   </div>
 
   <div class="chart-grid">
     <div class="chart-card">
-      <div class="card-title">Avg. Project Age in QA</div>
+      <div class="card-title">Avg. Project Age in QA — Custom vs. Theme</div>
       <div class="card-sub">Days from R1 Ready to approved · monthly</div>
-      <div style="display:flex; gap:16px; margin-bottom:8px; font-size:11px; color:var(--text-2); flex-wrap:wrap;">
-        <span style="display:flex;align-items:center;gap:5px;"><span style="display:inline-block;width:20px;height:2px;background:#00B89C;"></span>Theme</span>
-        <span style="display:flex;align-items:center;gap:5px;"><span style="display:inline-block;width:20px;height:2px;background:#0F1C2E;"></span>Custom 1-Phase</span>
-        <span style="display:flex;align-items:center;gap:5px;"><span style="display:inline-block;width:20px;height:2px;background:#F59E0B;"></span>Custom 2-Phase</span>
+      <div class="legend">
+        <span><span class="leg" style="background:#0F1C2E;"></span>Custom</span>
+        <span><span class="leg" style="background:#00B89C;"></span>Theme</span>
       </div>
-      <div style="position:relative; height:185px;"><canvas id="c_age"></canvas></div>
+      <div style="position:relative; height:160px;"><canvas id="c_age"></canvas></div>
     </div>
     <div class="chart-card">
-      <div class="card-title">Avg. Revision Rounds</div>
-      <div class="card-sub">Monthly trend · Feb–Jul 2026</div>
-      <div style="display:flex; gap:16px; margin-bottom:8px; font-size:11px; color:var(--text-2); flex-wrap:wrap;">
-        <span style="display:flex;align-items:center;gap:5px;"><span style="display:inline-block;width:20px;height:2px;background:#00B89C;"></span>Theme</span>
-        <span style="display:flex;align-items:center;gap:5px;"><span style="display:inline-block;width:20px;height:2px;background:#0F1C2E;"></span>Custom 1-Phase</span>
-        <span style="display:flex;align-items:center;gap:5px;"><span style="display:inline-block;width:20px;height:2px;background:#F59E0B;"></span>Custom 2-Phase</span>
+      <div class="card-title">Avg. Revision Rounds — Custom vs. Theme</div>
+      <div class="card-sub">Monthly trend · Mar–Jul 2026</div>
+      <div class="legend">
+        <span><span class="leg" style="background:#0F1C2E;"></span>Custom</span>
+        <span><span class="leg" style="background:#00B89C;"></span>Theme</span>
       </div>
-      <div style="position:relative; height:185px;"><canvas id="c_rounds"></canvas></div>
+      <div style="position:relative; height:160px;"><canvas id="c_rounds"></canvas></div>
     </div>
   </div>
 
@@ -815,39 +697,42 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
 
 <!-- ── TEAM & CLAUDE ── -->
 <div id="panel-team" class="panel">
+  <p style="font-size:12px; color:var(--text-2); margin-bottom:20px; line-height:1.6;">
+    Source: <strong>Claude Enterprise Analytics</strong> · July 2026 · Chat = distinct conversations, Code = Claude Code sessions, Cowork = Cowork sessions. Pull monthly from <code style="font-size:11px; background:var(--slate-lt); padding:1px 5px; border-radius:4px;">claude.ai/analytics</code>
+  </p>
+
   <div class="kpi-grid" style="margin-bottom:24px;">
-    <div class="kpi navy">
-      <div class="kpi-label">Claude — team usage (July)</div>
-      <div class="kpi-val" id="d_activeUsers">—</div>
-      <div class="kpi-sub"><span class="note">of 24 members · <span id="d_totalAllSessions">—</span> total sessions</span></div>
-    </div>
     <div class="kpi teal">
-      <div class="kpi-label">Total sessions since launch</div>
-      <div class="kpi-val teal" id="d_cumulativeSessions">3,388</div>
-      <div class="kpi-sub"><span class="note">Mar–Jul 2026 · Chat, Code & Cowork</span></div>
+      <div class="kpi-label">Used Claude in July</div>
+      <div class="kpi-val teal" id="d_teamActive">—</div>
+      <div class="kpi-sub"><span class="note">of <span id="d_teamTotal">—</span> team members</span></div>
     </div>
     <div class="kpi navy">
-      <div class="kpi-label">Chat conversations (July)</div>
+      <div class="kpi-label">Chat conversations</div>
       <div class="kpi-val" id="d_totalChat">—</div>
-      <div class="kpi-sub"><span class="note">Across whole team</span></div>
+      <div class="kpi-sub"><span class="note">across whole team</span></div>
     </div>
     <div class="kpi navy">
-      <div class="kpi-label">Claude Code sessions (July)</div>
+      <div class="kpi-label">Claude Code sessions</div>
       <div class="kpi-val" id="d_totalCode">—</div>
       <div class="kpi-sub"><span class="note">FEDs heavily leading</span></div>
     </div>
     <div class="kpi navy">
-      <div class="kpi-label">Cowork sessions (July)</div>
+      <div class="kpi-label">Cowork sessions</div>
       <div class="kpi-val" id="d_totalCowork">—</div>
-      <div class="kpi-sub"><span class="note">Across team</span></div>
+      <div class="kpi-sub"><span class="note">across team</span></div>
+    </div>
+    <div class="kpi amber">
+      <div class="kpi-label">No July activity</div>
+      <div class="kpi-val" id="d_teamNotStarted">—</div>
+      <div class="kpi-sub" id="d_notStartedSub"></div>
     </div>
   </div>
 
   <div class="chart-grid" style="margin-bottom:24px;">
-    <!-- Bar chart: top 10 users, 50% width -->
-    <div class="chart-card">
+    <div class="chart-card full">
       <div class="card-title">Product Usage by Team Member — July 2026</div>
-      <div class="card-sub">Top 10 users · Chat, Claude Code, and Cowork sessions</div>
+      <div class="card-sub">Chat conversations · Claude Code sessions · Cowork sessions · source: Claude Enterprise Analytics</div>
       <div class="legend">
         <span><span class="leg" style="background:var(--purple);"></span>Chat</span>
         <span><span class="leg" style="background:#0EA5E9;"></span>Claude Code</span>
@@ -855,22 +740,7 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
       </div>
       <div style="position:relative; height:280px;"><canvas id="c_usageByPerson" role="img" aria-label="Stacked bar chart of Claude product usage per team member in July 2026.">Usage by person chart.</canvas></div>
     </div>
-    <!-- Donut chart: product split -->
-    <div class="chart-card">
-      <div class="card-title">Claude Usage by Product — July 2026</div>
-      <div class="card-sub">Chat conversations · Claude Code sessions · Cowork sessions · 24 team members</div>
-      <div class="legend">
-        <span><span class="leg" style="background:var(--purple);"></span>Chat (77)</span>
-        <span><span class="leg" style="background:#0EA5E9;"></span>Code (1,237)</span>
-        <span><span class="leg" style="background:var(--teal);"></span>Cowork (133)</span>
-      </div>
-      <div style="position:relative; height:220px;"><canvas id="c_claudeUsers"></canvas></div>
-    </div>
   </div>
-
-  <p style="font-size:11px; color:var(--text-3); margin-bottom:24px; line-height:1.6;">
-    Source: <strong style="color:var(--text-2);">Claude Enterprise Analytics</strong> · July 2026 · Chat = distinct conversations, Code = Claude Code sessions, Cowork = Cowork sessions. Pull monthly from <code style="font-size:11px; background:var(--slate-lt); padding:1px 5px; border-radius:4px;">claude.ai/analytics</code>
-  </p>
 
   <div id="fnDesigners" class="fn-section"></div>
   <div id="fnFEDs" class="fn-section"></div>
@@ -920,37 +790,28 @@ const DEFAULTS = {
   pilotAvg: 147,
   pilotCount: 9,
   blendedRate: 75,
-  activeUsers: 0, totalSeats: 24,
+  activeUsers: 0, totalSeats: 15,
 
   // QA data
-  avgIssues: 12.8, issuesDelta: "▼ vs Jun 15.2 — improving",
-  avgAge: 9.1,    ageDelta:    "▲ vs Jun 8.4 — monitoring",
-  avgRounds: 3.2, roundsDelta: "▼ vs Jun 3.6 — improving",
+  avgIssues: 17.4, issuesDelta: "▼ vs Jun 21.4 — improving",
+  avgAge: 8.2,    ageDelta:    "▲ slightly vs Jun 8.1 — monitoring",
+  avgRounds: 2.4, roundsDelta: "▼ vs Jun 2.8 — improving",
   totalProjects: 134,
-  qaMonths: "Feb, Mar, Apr, May, Jun, Jul",
-  customIssues: [16.8, 17.1, 18.2, 18.3, 21.4, 17.4],
-  themeIssues:  [1.9, 2.0, 1.5, 2.2, 2.0, 2.2],
-  ageSeries:    [5.1, 5.1, 7.5, 4.2, 8.1, 8.2],
+  qaMonths: "Mar, Apr, May, Jun, Jul",
+  customIssues: [17.1, 18.2, 18.3, 21.4, 17.4],
+  themeIssues:  [2.0, 1.5, 2.2, 2.0, 2.2],
+  ageSeries:    [5.1, 7.5, 4.2, 8.1, 8.2],
   roundsSeries:      [2.3, 2.3, 2.2, 2.8, 2.4],
-  // 6-month phase split (Feb-Jul 2026) — source: Jira DQA customfield_12073
-  qaMonths6:      ["Feb","Mar","Apr","May","Jun","Jul"],
-  custom1Issues:  [14.8, 12.4, 13.1, 13.6, 15.2, 12.8],
-  custom2Issues:  [19.5, 25.8, 27.5, 26.2, 27.6, 23.4],
-  custom1Age:     [5.6,  5.8,  9.2,  5.4,  8.4,  9.1],
-  custom2Age:     [20.0, 9.8,  18.4, 7.4,  14.2, 15.6],  // Feb outlier capped at 20 (actual 95d — single long-running 2-Phase BIC)
-  custom1Rounds:  [3.0,  3.1,  3.4,  3.1,  3.6,  3.2],
-  custom2Rounds:  [8.0,  5.2,  5.8,  4.8,  5.6,  5.1],
-  customAgeSeries:   [5.6, 7.2,  12.4, 7.1, 11.2, 11.8],
-  themeAgeSeries:    [4.6, 2.1, 2.8, 1.8, 3.4, 3.1],
-  customRoundsSeries:[3.0, 3.8, 3.9, 3.5, 4.2, 3.9],
-  themeRoundsSeries: [2.2, 1.8, 1.7, 1.7, 2.1, 1.9],
-  qaCritical: [0, 0, 0, 0, 0, 0],
-  qaMajor:    [0, 0, 0, 0, 0, 0],
-  qaMinor:    [0, 0, 0, 0, 0, 0],
+  customAgeSeries:   [7.2, 12.4, 7.1, 11.2, 11.8],
+  themeAgeSeries:    [2.1, 2.8,  1.8, 3.4,  3.1],
+  customRoundsSeries:[3.8, 3.9,  3.5, 4.2,  3.9],
+  themeRoundsSeries: [1.8, 1.7,  1.7, 2.1,  1.9],
+  qaCritical: [0, 0, 0, 0, 0],
+  qaMajor:    [0, 0, 0, 0, 0],
+  qaMinor:    [0, 0, 0, 0, 0],
 
   weeklyUsers: [0,0,0,0,0,0,0,0],
 
-  cumulativeSessions: 3388,  // Mar–Jul 2026 total · Chat 145, Code 2919, Cowork 324
   // July 2026 usage — source: Claude Enterprise Analytics (chat.claude.ai/analytics)
   // chat = Chat conversations, code = Claude Code sessions, cowork = Cowork sessions
   people: [
@@ -980,7 +841,8 @@ const DEFAULTS = {
     {name:"Landon Foster",    role:"QA Specialist", fn:"qa",       status:"mid", chat:0,  code:0,  cowork:0},
     {name:"Joshua Fanning",   role:"QA Specialist", fn:"qa",       status:"mid", chat:0,  code:0,  cowork:0},
     {name:"Jonny Young",      role:"Web Designer",  fn:"designer", status:"mid", chat:0,  code:0,  cowork:0},
-    {name:"Corbin Bentley",   role:"QA Manager",    fn:"qa",       status:"mid", chat:0,  code:5,  cowork:0}, {name:"Corbin Bentley",   role:"QA Manager",    fn:"qa",       status:"off", chat:0,  code:0,  cowork:0},
+    {name:"Kelly Wilson",     role:"Team Lead",     fn:"lead",     status:"on",  chat:5,  code:0,  cowork:0},
+    {name:"Corbin Bentley",   role:"VP PS",         fn:"lead",     status:"off", chat:0,  code:0,  cowork:0},
   ],
 
   // Cloud Coach: AI Pilot Custom Design Projects report (Jan–Aug 2026, closed, legacy removed)
@@ -1028,13 +890,10 @@ const DEFAULTS = {
     {label:"Q4 2026 · Planned",          text:"Cycle time tracking live · Full KPI framework operational · QA data via Jira", status:"pending", tag:"Scale"},
   ],
 
-  lastUpdated: null,
-  narrativeAI:     "<ul style='margin:0; padding-left:16px; line-height:2;'><li>The pilot cohort continues to outperform the Imagine target of 165h, averaging 147h actual across 9 completed projects.</li><li>All 7 active AI workstreams are in production or active testing.</li><li>FED adoption of Claude Code is accelerating — 5 team members logged over 50 sessions in July, with Rachel Edwards leading at 530 sessions.</li><li>Discovery synthesis and AI-assisted homepage mockups are driving the strongest time savings in the Design function.</li></ul>",
-  narrativeQA:     "<ul style='margin:0; padding-left:16px; line-height:2;'><li>Custom 1-Phase issues dropped to 12.8 in July — the lowest point in the 6-month window — suggesting push-left practices are reducing defect volume.</li><li>Custom 2-Phase improved from 27.6 to 23.4, though age in QA ticked up slightly for both Custom types.</li><li>Theme performance remained stable.</li><li>July saw 134 total projects approved across all types.</li></ul>",
-  narrativeClaude: "<ul style='margin:0; padding-left:16px; line-height:2;'><li>20 of 24 team members were active on Claude in July across Chat, Claude Code, and Cowork.</li><li>Claude Code dominates usage at 1,237 sessions — driven primarily by the FED team.</li><li>Kristi Young leads Cowork adoption at 28 sessions.</li><li>Multi-product usage signals Claude is becoming embedded across workflow types, not just a single use case.</li></ul>"
+  lastUpdated: null
 };
 
-const SK = "finalsite_cs_kpi_v39";
+const SK = "finalsite_cs_kpi_v4";
 let D = load();
 let editing = false;
 const CC = {};
@@ -1071,9 +930,6 @@ function toggleEdit() {
 }
 function fillInputs() {
   sv("i_period",        D.period);
-  sv("ov_aiInput",      D.narrativeAI || '');
-  sv("ov_qaInput",      D.narrativeQA || '');
-  sv("ov_claudeInput",  D.narrativeClaude || '');
   sv("i_pilotAvg",      D.pilotAvg);
   sv("i_pilotCount",    D.pilotCount);
   sv("i_pilotAvg2",     D.pilotAvg);
@@ -1101,9 +957,6 @@ function gn(id,fb=0) { const v=parseFloat(gv(id,"")); return isNaN(v)?fb:v; }
 
 function readInputs() {
   D.period        = gv("i_period", D.period);
-  if(gv("ov_aiInput"))     D.narrativeAI     = gv("ov_aiInput");
-  if(gv("ov_qaInput"))     D.narrativeQA     = gv("ov_qaInput");
-  if(gv("ov_claudeInput")) D.narrativeClaude = gv("ov_claudeInput");
   D.pilotAvg      = gn("i_pilotAvg", D.pilotAvg);
   D.pilotCount    = gn("i_pilotCount", D.pilotCount);
   D.activeUsers   = gn("i_activeUsers", D.activeUsers);
@@ -1155,13 +1008,11 @@ function renderOverview() {
   setText("d_pilotAvg", D.pilotAvg+"h");
   setText("d_pilotAvg2", D.pilotAvg+"h");
   setText("d_hoursSaved", hoursSaved+"h");
-  const totalHoursSaved = hoursSaved * D.pilotCount;
-  setText("d_totalHoursSaved", totalHoursSaved.toLocaleString()+"h");
-  setText("d_totalSavingsDollars", (totalHoursSaved * D.blendedRate).toLocaleString());
   setText("d_totalSavings", Math.round(saved).toLocaleString());
   setText("d_savingsNote", `${D.pilotCount} projects × ${hoursSaved}h × $${D.blendedRate}/hr`);
   setText("d_savingsPerProj", Math.round(perProj).toLocaleString());
   setText("d_activeUsers", D.activeUsers || "—");
+  setText("d_totalSeats", D.totalSeats);
   document.getElementById("periodBadge").innerHTML = `<i class="ti ti-calendar"></i> ${D.period}`;
 
   // Claude usage totals from people data
@@ -1171,24 +1022,7 @@ function renderOverview() {
   setText("d_activeUsers", activeCount);
   setText("d_totalAllSessions", totalAllSessions.toLocaleString());
 
-  // Narrative text
-  const aiEl = document.getElementById('ov_aiText');
-  const qaEl = document.getElementById('ov_qaText');
-  const clEl = document.getElementById('ov_claudeText');
-  if(aiEl) aiEl.innerHTML = D.narrativeAI || '';
-  if(qaEl) qaEl.innerHTML = D.narrativeQA || '';
-  if(clEl) clEl.innerHTML = D.narrativeClaude || '';
-
-  // Overview headline metrics
-  setText('ov_pilotAvg', (D.pilotAvg || 147) + 'h');
-  // Pull QA values from last entry in series (July)
-  const c1Last = D.custom1Issues && D.custom1Issues.length ? D.custom1Issues[D.custom1Issues.length-1] : 12.8;
-  const c2Last = D.custom2Issues && D.custom2Issues.length ? D.custom2Issues[D.custom2Issues.length-1] : 23.4;
-  setText('ov_c1Issues', c1Last);
-  setText('ov_c2Issues', c2Last);
-  const activeCount2 = D.people ? D.people.filter(p=>p.fn!=='lead'&&((p.chat||0)+(p.code||0)+(p.cowork||0))>0).length : 20;
-  const totalCount2  = D.people ? D.people.filter(p=>p.fn!=='lead').length : 23;
-  setText('ov_claudeActive', activeCount2 + '/' + totalCount2);
+  // Update LOE bars
   const maxH = D.bicBaseline;
   const pilotPct  = (D.pilotAvg / maxH * 100).toFixed(1);
   const targetPct = (D.imagineTarget / maxH * 100).toFixed(1);
@@ -1219,7 +1053,7 @@ function renderPilotCards() {
     return `<div class="pilot-card">
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
         <div class="pilot-name" style="margin-bottom:0;">${p.name}</div>
-        <span style="font-size:10px; font-weight:600; color:var(--text-3); flex-shrink:0; margin-left:8px; text-transform:uppercase; letter-spacing:.05em;">${phaseLabels[p.phase]||p.phase}</span>
+        <span class="pilot-phase ${phaseColors[p.phase]||'teal'}" style="flex-shrink:0; margin-left:8px;">${phaseLabels[p.phase]||p.phase}</span>
       </div>
       <div class="pilot-hours">${p.hours}h <span>saved</span></div>
       <div class="pilot-note">${p.note}</div>
@@ -1238,7 +1072,7 @@ function renderWorkflows() {
       <div>
         <div class="wf-name">${w.name}</div>
         <div class="wf-owner">${w.owner}</div>
-        <span class="wf-status ${w.status==="live"?"live":w.status==="testing"?"testing":"pilot"}">${w.status==="live"?"Live":w.status==="testing"?"Testing":"Pilot"}</span>
+        <span class="wf-status ${w.status==="live"?"live":w.status==="testing"?"mid":"pilot"}">${w.status==="live"?"Live":w.status==="testing"?"Testing":"Pilot"}</span>
       </div>
     </div>`).join("");
 }
@@ -1310,7 +1144,7 @@ function renderTeam() {
           <div class="mini-fill" style="width:${Math.round((total/(maxChat+maxCode+maxCowork))*100)}%; background:${fn.barColor};"></div>
         </div>
         <div style="font-size:11px; font-weight:700; color:var(--text); margin-top:4px;">${total} sessions</div>
-        ` : p.status==="mid" ? `<div style="font-size:11px; color:var(--text-3); font-style:italic; margin-top:4px;">No July activity</div>` : ''}
+        ` : p.status==="mid" ? `<div style="font-size:11px; color:var(--amber); font-style:italic; margin-top:4px;">Onboarding</div>` : ''}
       </div>`;
     }).join("");
 
@@ -1325,7 +1159,7 @@ function renderTeam() {
         </div>
       </div>
       <div class="person-grid">${cards}</div>
-      
+      ${hiddenCount > 0 ? `<p style="font-size:11px; color:var(--text-3); margin-top:10px; font-style:italic;"><i class="ti ti-users" style="font-size:12px;"></i> + ${hiddenCount} member${hiddenCount>1?"s":""} with no July activity — being followed up</p>` : ""}
       `;
   });
 
@@ -1491,47 +1325,43 @@ function renderCharts() {
     }
   });
 
-  const months6 = D.qaMonths6 || pl(D.qaMonths);
   dc("c_issuesByType");
   CC.c_issuesByType = new Chart(document.getElementById("c_issuesByType"), {
     type:"line",
     data:{
-      labels: months6,
+      labels: months,
       datasets:[
-        {label:"Theme",          data:D.themeIssues,       borderColor:"#00B89C", backgroundColor:"rgba(0,184,156,.06)", fill:false, tension:.4, pointRadius:3},
-        {label:"Custom 1-Phase", data:D.custom1Issues||[], borderColor:"#0F1C2E", backgroundColor:"rgba(15,28,46,.06)", fill:false, tension:.4, pointRadius:3},
-        {label:"Custom 2-Phase", data:D.custom2Issues||[], borderColor:"#F59E0B", backgroundColor:"rgba(245,158,11,.06)", fill:false, tension:.4, pointRadius:3, borderDash:[4,3]},
+        {label:"Custom", data:D.customIssues, borderColor:"#0F1C2E", backgroundColor:"rgba(15,28,46,.06)", fill:true, tension:.4, pointRadius:3},
+        {label:"Theme",  data:D.themeIssues,  borderColor:"#00B89C", backgroundColor:"rgba(0,184,156,.06)", fill:true, tension:.4, pointRadius:3},
       ]
     },
-    options:{...BASE, plugins:{...BASE.plugins, legend:{display:false}}}
+    options:{...BASE}
   });
 
   dc("c_age");
   CC.c_age = new Chart(document.getElementById("c_age"), {
     type:"line",
     data:{
-      labels: months6,
+      labels: months,
       datasets:[
-        {label:"Theme",          data:D.themeAgeSeries||[], borderColor:"#00B89C", fill:false, tension:.4, pointRadius:3},
-        {label:"Custom 1-Phase", data:D.custom1Age||[], borderColor:"#0F1C2E", fill:false, tension:.4, pointRadius:3},
-        {label:"Custom 2-Phase", data:D.custom2Age||[], borderColor:"#F59E0B", fill:false, tension:.4, pointRadius:3, borderDash:[4,3]},
+        {label:"Custom", data:D.customAgeSeries||D.ageSeries, borderColor:"#0F1C2E", backgroundColor:"rgba(15,28,46,.06)", fill:true, tension:.4, pointRadius:3},
+        {label:"Theme",  data:D.themeAgeSeries||[], borderColor:"#00B89C", backgroundColor:"rgba(0,184,156,.06)", fill:true, tension:.4, pointRadius:3, borderDash:[4,3]}
       ]
     },
-    options:{...BASE, plugins:{...BASE.plugins, legend:{display:false}}}
+    options:{...BASE}
   });
 
   dc("c_rounds");
   CC.c_rounds = new Chart(document.getElementById("c_rounds"), {
     type:"line",
     data:{
-      labels: months6,
+      labels: months,
       datasets:[
-        {label:"Theme",          data:D.themeRoundsSeries||[], borderColor:"#00B89C", fill:false, tension:.4, pointRadius:3},
-        {label:"Custom 1-Phase", data:D.custom1Rounds||[], borderColor:"#0F1C2E", fill:false, tension:.4, pointRadius:3},
-        {label:"Custom 2-Phase", data:D.custom2Rounds||[], borderColor:"#F59E0B", fill:false, tension:.4, pointRadius:3, borderDash:[4,3]},
+        {label:"Custom", data:D.customRoundsSeries||D.roundsSeries, borderColor:"#0F1C2E", backgroundColor:"rgba(15,28,46,.06)", fill:true, tension:.4, pointRadius:3},
+        {label:"Theme",  data:D.themeRoundsSeries||[], borderColor:"#00B89C", backgroundColor:"rgba(0,184,156,.06)", fill:true, tension:.4, pointRadius:3, borderDash:[4,3]}
       ]
     },
-    options:{...BASE, plugins:{...BASE.plugins, legend:{display:false}}}
+    options:{...BASE}
   });
 
   // Pilot est vs actual
@@ -1549,12 +1379,11 @@ function renderCharts() {
     options:{...BASE}
   });
 
-  // Usage by person — top 10 sorted by total desc
+  // Usage by person — sorted by total desc, show everyone with any activity
   const activePeople = D.people
     .filter(p=>p.fn!=="lead")
     .filter(p=>(p.chat||0)+(p.code||0)+(p.cowork||0)>0)
-    .sort((a,b)=>((b.chat||0)+(b.code||0)+(b.cowork||0))-((a.chat||0)+(a.code||0)+(a.cowork||0)))
-    .slice(0,10);
+    .sort((a,b)=>((b.chat||0)+(b.code||0)+(b.cowork||0))-((a.chat||0)+(a.code||0)+(a.cowork||0)));
 
   const personLabels = activePeople.map(p=>p.name.split(" ")[0]);
   dc("c_usageByPerson");
@@ -1585,7 +1414,6 @@ function renderCharts() {
 function setText(id,v) { const el=document.getElementById(id); if(el) el.textContent=v; }
 
 function renderTeamTotals() {
-  setText("d_cumulativeSessions", (D.cumulativeSessions||0).toLocaleString());
   const corePeople = D.people.filter(p=>p.fn!=="lead");
   const totalChat   = corePeople.reduce((s,p)=>s+(p.chat||0),0);
   const totalCode   = corePeople.reduce((s,p)=>s+(p.code||0),0);
