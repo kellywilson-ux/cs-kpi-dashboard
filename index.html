@@ -421,8 +421,8 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
     </div>
     <div class="kpi teal">
       <div class="kpi-label">Reduction in delivery hours</div>
-      <div class="kpi-val teal">52%</div>
-      <div class="kpi-sub"><span class="note">344h BIC avg → 165h Imagine target</span></div>
+      <div class="kpi-val teal">67%</div>
+      <div class="kpi-sub"><span class="note">~500h BIC scope → 165h Imagine target</span></div>
     </div>
     <div class="kpi teal">
       <div class="kpi-label">Team active on Claude</div>
@@ -432,7 +432,7 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
   </div>
 
   <!-- ── SECTION 2: Monthly narrative ── -->
-  <div class="section-label" style="margin-bottom:12px;">Monthly Narrative</div>
+  <div class="section-label" style="margin-bottom:12px;">Monthly Key Insights</div>
   <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px 28px; margin-bottom:28px; box-shadow:var(--shadow);">
     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px;" id="ov_narrativeGrid">
 
@@ -601,12 +601,7 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
     <div class="kpi teal">
       <div class="kpi-label">Imagine target</div>
       <div class="kpi-val teal">165h</div>
-      <div class="kpi-sub"><span class="note">Pilot already under target</span></div>
-    </div>
-    <div class="kpi teal">
-      <div class="kpi-label">Pilot cohort avg</div>
-      <div class="kpi-val teal" id="d_pilotAvg2">142h</div>
-      <div class="kpi-sub"><span class="note">11 projects · Jan–Aug 2026</span></div>
+      <div class="kpi-sub"><span class="note">Beating target by 13%</span></div>
     </div>
     <div class="kpi amber">
       <div class="kpi-label">Hours Saved Per Project</div>
@@ -644,7 +639,7 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
         <div class="loe-row-note" style="color:var(--coral); font-weight:700;">Pre-AI Baseline</div>
       </div>
       <div class="loe-row">
-        <div class="loe-row-label">Pilot Cohort<br><span style="font-size:10px; color:var(--text-3);">11 completed projects</span></div>
+        <div class="loe-row-label">Imagine Design<br><span style="font-size:10px; color:var(--text-3);">11 completed projects</span></div>
         <div class="loe-track" style="position:relative;">
           <div class="loe-fill" id="pilotBar" style="width:40.7%; background:var(--teal);">
             <span>142h</span>
@@ -653,22 +648,12 @@ input.ef:focus, select.ef:focus { outline: 2px solid var(--teal); outline-offset
         </div>
         <div class="loe-row-note" style="color:var(--teal); font-weight:700;"><i class="ti ti-check" style="font-size:12px;"></i> Under Target</div>
       </div>
-      <div class="loe-row">
-        <div class="loe-row-label">Imagine Target<br><span style="font-size:10px; color:var(--text-3);">goal</span></div>
-        <div class="loe-track">
-          <div class="loe-fill" style="width:48%; background:var(--navy); opacity:.4;">
-            <span>165h</span>
-          </div>
-        </div>
-        <div class="loe-row-note">Target</div>
-      </div>
     </div>
     <div class="loe-legend">
       <span><span class="leg" style="background:#CBD5E1;"></span>BIC Estimated (~500h)</span>
       <span><span class="leg" style="background:var(--coral);"></span>BIC Avg Actual (344h)</span>
-      <span><span class="leg" style="background:var(--teal);"></span>Pilot Cohort (avg actual, Jan–Aug 2026)</span>
-      <span><span class="leg" style="background:var(--navy);"></span>Imagine Target</span>
-      <span style="color:var(--coral);"><i class="ti ti-minus" style="font-size:12px;"></i> Target line</span>
+      <span><span class="leg" style="background:var(--teal);"></span>Imagine Design Experience (avg actual)</span>
+      <span style="color:var(--coral);"><i class="ti ti-minus" style="font-size:12px;"></i> Target line (165h)</span>
     </div>
   </div>
 
@@ -1031,12 +1016,12 @@ const DEFAULTS = {
   ],
 
   lastUpdated: null,
-  narrativeAI:     "<ul style='margin:0; padding-left:16px; line-height:2;'><li>The pilot cohort has grown to 11 completed projects, averaging 142h actual — 13% under the 165h Imagine target and 59% below the 344h BIC baseline.</li><li>11 completed pilot projects have returned an estimated 2,222 hours of capacity to the team — equivalent to roughly $166,650 in time savings at blended rate.</li><li>All 7 active AI workstreams remain in production or active testing, with Figma → Composer and Figma vs. live site comparison advancing through testing.</li><li>Discovery synthesis, AI-assisted homepage mockups, and GA4 → Design insights are driving the strongest time savings in the Design function.</li></ul>",
-  narrativeQA:     "<ul style='margin:0; padding-left:16px; line-height:2;'><li>Custom 1-Phase issues rose to 30.6 in August, up from 12.8 in July. This uptick is largely attributable to the introduction of our new A11y tool and the work of Joshua Fanning, our Accessibility Technical Specialist, who is surfacing more accessibility-related issues. We’ll monitor and expect numbers to even out over the next couple of months.</li><li>Custom 2-Phase age averaged 47.5 days, driven by two long-running complex projects.</li><li>Theme age of 12.5 days is inflated by two projects that entered QA in June — without those outliers, Theme age remains low.</li><li>August saw 84 total projects approved across all types.</li></ul>",
-  narrativeClaude: "<ul style='margin:0; padding-left:16px; line-height:2;'><li>21 of 24 team members were active on Claude in August — the team has now logged 5,187 total sessions since launch in March 2026.</li><li>Claude Code dominates at 1,519 sessions — 5 FEDs each logged over 50 sessions, with Rachel Edwards leading at 442 and Josh Webb at 274.</li><li>Designers showed strong growth: Kealan Duffy led Chat with 30 conversations, Jon Kirgis led Cowork with 28 sessions, and Nathan Lyttle added 249 Claude Code sessions.</li><li>Joshua Fanning recorded first-ever Claude activity (44 Code sessions) — a positive onboarding signal for the QA team.</li></ul>"
+  narrativeAI:     "Eleven completed pilot projects outperformed benchmark targets to return 2,222 hours and $166K in business capacity. All seven AI workstreams are now live or in testing, with discovery synthesis, AI-assisted mockups, and GA4 insights driving the largest efficiency gains.",
+  narrativeQA:     "August saw 84 project approvals alongside metric increases in project age and Custom 1-Phase issues, which were driven by complex outlier projects and expanded accessibility testing. These elevated issue counts are expected to normalize over the next few months as monitoring continues.",
+  narrativeClaude: "In August, 21 of 24 team members contributed to 5,187 total sessions since launch, with Claude Code leading usage driven by the FED team. Platform adoption continues to expand across Designer Cowork and Chat, alongside initial activity from the QA team."
 };
 
-const SK = "finalsite_cs_kpi_v48";
+const SK = "finalsite_cs_kpi_v54";
 let D = load();
 let editing = false;
 const CC = {};
